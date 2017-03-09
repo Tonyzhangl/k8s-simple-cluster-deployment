@@ -1,0 +1,8 @@
+- name: copy kube-controller-manager conf file
+  copy: src=roles/controllermanager/files/kube-controller-manager.conf dest=/opt/kubernetes/cfg
+- name: copy kube-controller-manager service file
+  copy: src=roles/controllermanager/files/kube-controller-manager.service dest=/usr/lib/systemd/system
+- name: copy kube-controller-manager file
+  copy: src=roles/controllermanager/files/kube-controller-manager dest=/opt/kubernetes/bin mode=766
+- name: start kube-controller-manager service
+  shell: systemctl daemon-reload && systemctl start kube-controller-manager && systemctl enable kube-controller-manager

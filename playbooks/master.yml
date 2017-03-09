@@ -1,0 +1,7 @@
+- name: deploy master
+  hosts: master
+  roles:
+    #   - { role: etcd, tags: ["etcd"] }
+    #   - { role: apiserver, tags: ["apierver"] }
+    # - { role: controllermanager, tags: ["controllermanager"] }
+    - { role: scheduler, tags: ["scheduler"] }

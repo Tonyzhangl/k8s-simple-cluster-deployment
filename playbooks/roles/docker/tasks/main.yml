@@ -1,0 +1,21 @@
+- name: create dir for docker service
+  file: path=/etc/systemd/system/docker.service.d/ state=directory
+- name: create dir for docker.tar.gz
+  file: path=/opt/dcos/docker state=directory
+- name: copy docker installed tar
+  copy: src=roles/docker/files/docker-1.11.0.tgz dest=/opt/dcos/docker/
+- name: unarchive docker.tgz
+# unarchive: src=roles/docker/docker-1.11.0.tgz dest=/opt/dcos/docker/
+  shell: tar -xvzf /opt/dcos/docker/docker-1.11.0.tgz  -C /opt/dcos/docker/
+- name: mv docker to /usr/bin 
+  shell: mv /opt/dcos/docker/docker/* /usr/bin/
+- name: delete docker dir
+  file: path=/opt/dcos/docker/ state=absent
+- name: copy docker service
+  copy: src=roles/docker/files/override.conf dest=/etc/systemd/system/docker.service.d/
+- name: daemon-reload
+  shell: systemctl daemon-reload
+- name: start docker
+  shell: systemctl start docker
+- name: enable docker
+  shell: systemctl enable docker

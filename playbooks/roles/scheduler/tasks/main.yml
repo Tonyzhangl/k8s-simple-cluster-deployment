@@ -1,0 +1,8 @@
+- name: copy kube-scheduler conf file
+  copy: src=roles/scheduler/files/kube-scheduler.conf dest=/opt/kubernetes/cfg
+- name: copy kube-scheduler service file
+  copy: src=roles/scheduler/files/kube-scheduler.service dest=/usr/lib/systemd/system
+- name: copy kube-scheduler file
+  copy: src=roles/scheduler/files/kube-scheduler dest=/opt/kubernetes/bin mode=766
+- name: start kube-scheduler service
+  shell: systemctl daemon-reload && systemctl start kube-scheduler && systemctl enable kube-scheduler

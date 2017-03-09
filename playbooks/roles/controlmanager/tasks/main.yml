@@ -1,0 +1,2 @@
+- name: copy kube-controller-manager conf file
+  copy: src=roles/controllermanager/files/kube-controller-manager.conf dest=/opt/kubernetes/cfg

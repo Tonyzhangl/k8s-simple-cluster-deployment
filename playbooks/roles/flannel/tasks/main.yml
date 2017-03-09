@@ -1,0 +1,16 @@
+- name: copy mk-docker-opts.sh
+  copy: src=roles/flannel/files/mk-docker-opts.sh  dest=/opt/kubernetes/bin/ mode=766
+- name: copy remove-docker0.sh
+  copy: src=roles/flannel/files/remove-docker0.sh  dest=/opt/kubernetes/bin/ mode=766
+- name: copy flannel
+  copy: src=roles/flannel/files/flanneld dest=/opt/kubernetes/bin/ mode=766
+- name: mkdir cfg directory
+  file: path=/opt/kubernetes/cfg state=directory
+- name: copy flannel config file
+  template: src=roles/flannel/templates/flannel.j2 dest=/opt/kubernetes/cfg/flannel
+- name: copy flannel service file
+  copy: src=roles/flannel/files/flannel.service dest=/usr/lib/systemd/system/
+- name: start flannel
+  shell: systemctl daemon-reload && systemctl start flannel && systemctl enable flannel
+- name: restart docker
+  shell: systemctl restart docker

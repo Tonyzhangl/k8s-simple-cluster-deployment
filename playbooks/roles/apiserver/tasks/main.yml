@@ -1,0 +1,8 @@
+- name: copy kube-apiserver conf file
+  copy: src=roles/apiserver/files/kube-apiserver.conf dest=/opt/kubernetes/cfg
+- name: copy kube-apiserver service file
+  copy: src=roles/apiserver/files/kube-apiserver.service dest=/usr/lib/systemd/system/
+- name: copy kube-apiserver excuted file
+  copy: src=roles/apiserver/files/kube-apiserver dest=/opt/kubernetes/bin mode=766
+- name: start kube-apiserver
+  shell: systemctl daemon-reload && systemctl start kube-apiserver && systemctl enable kube-apiserver

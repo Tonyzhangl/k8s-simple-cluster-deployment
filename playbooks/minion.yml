@@ -1,0 +1,5 @@
+- name: deploy minion
+  hosts: minion
+  roles:
+    #   - { role: docker, tags: ["docker"] }
+      - { role: flannel, tags: ["flannel"] }
