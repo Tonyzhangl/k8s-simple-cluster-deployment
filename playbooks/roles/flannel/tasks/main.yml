@@ -7,7 +7,7 @@
 - name: mkdir cfg directory
   file: path=/opt/kubernetes/cfg state=directory
 - name: copy flannel config file
-  template: src=roles/flannel/templates/flannel.j2 dest=/opt/kubernetes/cfg/flannel
+  copy: src=roles/flannel/files/flannel.conf dest=/opt/kubernetes/cfg/
 - name: copy flannel service file
   copy: src=roles/flannel/files/flannel.service dest=/usr/lib/systemd/system/
 - name: start flannel

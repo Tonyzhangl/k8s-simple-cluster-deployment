@@ -1,0 +1,4 @@
+- name: copy pause image
+  copy: src=roles/basecont/files/pause.tar.gz dest=/opt/kubernetes/cfg/
+- name: docker load pause iamge
+  shell: docker load -i /opt/kubernetes/cfg/pause.tar.gz

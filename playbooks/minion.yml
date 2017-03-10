@@ -1,5 +1,8 @@
 - name: deploy minion
   hosts: minion
   roles:
-    #   - { role: docker, tags: ["docker"] }
+      - { role: docker, tags: ["docker"] }
       - { role: flannel, tags: ["flannel"] }
+      - { role: kubelet, tags: ["kubelet"] }
+      - { role: proxy, tags: ["proxy"] }
+      - { role: basecont, tags: ["basecont"] }

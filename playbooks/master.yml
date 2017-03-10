@@ -1,7 +1,8 @@
 - name: deploy master
   hosts: master
   roles:
+    #   - { role: docker, tags: ["docker"] }
     #   - { role: etcd, tags: ["etcd"] }
-    #   - { role: apiserver, tags: ["apierver"] }
-    # - { role: controllermanager, tags: ["controllermanager"] }
-    - { role: scheduler, tags: ["scheduler"] }
+      - { role: apiserver, tags: ["apierver"] }
+    #   - { role: controllermanager, tags: ["controllermanager"] }
+    #   - { role: scheduler, tags: ["scheduler"] }

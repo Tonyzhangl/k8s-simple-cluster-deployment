@@ -1,0 +1,8 @@
+- name: copy kubelet conf file
+  copy: src=roles/kubelet/files/kubelet.conf dest=/opt/kubernetes/cfg/
+- name: copy kubelet service file
+  copy: src=roles/kubelet/files/kubelet.service dest=/usr/lib/systemd/system/
+- name: copy kubelet file
+  copy: src=roles/kubelet/files/kubelet dest=/opt/kubernetes/bin/ mode=766
+- name: start kubelet service
+  shell: systemctl daemon-reload && systemctl start kubelet && systemctl enable kubelet

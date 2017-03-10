@@ -1,0 +1,8 @@
+- name: copy kube-proxy conf file
+  copy: src=roles/proxy/files/kube-proxy.conf dest=/opt/kubernetes/cfg/
+- name: copy kube-proxy service file
+  copy: src=roles/proxy/files/kube-proxy.service dest=/usr/lib/systemd/system/
+- name: copy kube-proxy file
+  copy: src=roles/proxy/files/kube-proxy dest=/opt/kubernetes/bin/ mode=766
+- name: start kube-proxy service
+  shell: systemctl daemon-reload && systemctl start kube-proxy && systemctl enable kube-proxy
